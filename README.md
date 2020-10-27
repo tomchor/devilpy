@@ -1,0 +1,4 @@
+# Devilpy
+
+Repurposed from lespy
+
