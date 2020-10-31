@@ -1,7 +1,8 @@
 import numpy as np
 import xarray as xr
 
-def hdf5tods(hfile, variables=None, labels=None):
+def hdf5tods(hfile, variables=None, labels=None,
+             recoord=True):
     """
     Reads data from an HDF5 into an xarray dataset
     Assumes data is organized as: group(variable) / group(snapshot) / data
@@ -37,6 +38,9 @@ def hdf5tods(hfile, variables=None, labels=None):
         #-----
 
     ds = xr.Dataset(DAs)
+    if recoord:
+        coords = dict(dim_0='X', dim_1='Y', dim_2='Z', label='label')
+        ds = ds.rename({ k : coords[k] for k, v in ds.coords.items() })
     return ds
 
 
