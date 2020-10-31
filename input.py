@@ -36,7 +36,7 @@ def hdf5tods(hfile, variables=None, labels=None):
         DAs[key] = DA
         #-----
 
-    ds = xr.Dataset(DAs).rename(dim_0='X', dim_1='Y', dim_2='Z')
+    ds = xr.Dataset(DAs)
     return ds
 
 
