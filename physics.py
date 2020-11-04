@@ -169,4 +169,9 @@ def w_star(simulation=None, zi=None, wt_s=None, t_init=None, noreal=False):
 
 
 
-
+def test_barotropic(U, ivar='X', β=0, Us=0):
+    ddU = U.differentiate(ivar).differentiate(ivar)
+    crit1 = β - ddU
+    crit2 = (U - Us) * crit1
+    unstable = crit2.where(crit2>0, drop=True).count().item() > 0
+    return crit1, crit2, unstable
